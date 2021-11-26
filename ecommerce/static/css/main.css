@@ -1,6 +1,5 @@
 body{
 	background-color: hsl(0, 0%, 98%);
-
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -10,7 +9,7 @@ h1,h2,h3,h4,h5,h6{
 .container{
 	min-width: 90%;
 	max-width: 90%;
-	min-height: calc(100vh - 245px);
+	min-height: calc(100vh - 265px);
 }
 
 .box-element{
@@ -66,8 +65,9 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .img-responsive{
-	width: 400px;
-	max-width: 400px;
+	min-width: 300px;
+	width: 300px;
+	max-width: 300px;
 	height: auto;
 	margin-top: 3rem;
 }
@@ -118,8 +118,9 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .navigationbtns{
+	border-bottom: medium;
 	width: 100%;
-	background-color: #4f868c!important
+	background-color: #4f868c!important;
 }
 
 .navbar-brand{
@@ -136,7 +137,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 #sidebar {
-	min-width: 250px;
+	min-width: 150px;
 	max-width: 250px;
 	background: #4f868c!important;
     color: #fff;
@@ -215,8 +216,8 @@ footer{
     #sidebar.active {
         margin-left: 0;
     }
-}
 
+}
 
 .card {
     background-color: #fff;
@@ -229,7 +230,7 @@ footer{
 
 .form-control {
     height: 48px;
-    border-radius: 25px
+    border-radius: 2px;
 }
 
 .form-control:focus {
@@ -241,13 +242,8 @@ footer{
     text-indent: 10px
 }
 
-
 .comment-text {
     font-size: 13px
-}
-
-.wish {
-    color: #35b69f
 }
 
 .user-feed {
