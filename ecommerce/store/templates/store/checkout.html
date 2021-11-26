@@ -17,36 +17,33 @@
                 <form id="form">
                     <div id="user-info">
                         <div class="form-field">
-                            <input required class="form-control" type="text" name="name" placeholder="Name..">
+                            <input required class="form-control" type="text" name="name" placeholder="Vardas..">
                         </div>
                         <div class="form-field">
-                            <input required class="form-control" type="email" name="email" placeholder="Email..">
+                            <input required class="form-control" type="email" name="email" placeholder="E-pastas..">
                         </div>
                     </div>
 
                     <div id="shipping-info">
                         <hr>
-                        <p>Shipping Information:</p>
+                        <p>Pristatymo informacija:</p>
                         <hr>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="address" placeholder="Address..">
+                            <input class="form-control" type="text" name="address" placeholder="Adresas..">
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="city" placeholder="City..">
+                            <input class="form-control" type="text" name="city" placeholder="Miestas..">
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="state" placeholder="State..">
+                            <input class="form-control" type="text" name="state" placeholder="Apskritis..">
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
-                        </div>
-                        <div class="form-field">
-                            <input class="form-control" type="text" name="country" placeholder="Zip code..">
+                            <input class="form-control" type="text" name="zipcode" placeholder="Pasto kodas..">
                         </div>
                     </div>
 
                     <hr>
-                    <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
+                    <input id="form-button" class="btn btn-success btn-block" type="submit" value="Tęsti">
                 </form>
             </div>
 
@@ -59,9 +56,9 @@
 
         <div class="col-lg-6">
             <div class="box-element">
-                <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+                <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Atgal į krepšelį</a>
                 <hr>
-                <h3>Order Summary</h3>
+                <h3>Užsakymo informacija</h3>
                 <hr> {% for item in items %}
                 <div class="cart-row">
                     <div style="flex:2"><img class="row-image" src="{{ baseUrl }}images/{{item.product.image}}"></div>
@@ -76,8 +73,8 @@
                     </div>
                 </div>
                 {% endfor %}
-                <h5>Items: {{order.get_cart_items}}</h5>
-                <h5>Total: ${{order.get_cart_total|floatformat:2}}</h5>
+                <h5>Prekės: {{order.get_cart_items}}</h5>
+                <h5>Suma: ${{order.get_cart_total|floatformat:2}}</h5>
             </div>
         </div>
     </div>

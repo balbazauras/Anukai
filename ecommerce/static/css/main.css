@@ -1,9 +1,16 @@
 body{
 	background-color: hsl(0, 0%, 98%);
+
 }
 
 h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
+}
+
+.container{
+	min-width: 90%;
+	max-width: 90%;
+	min-height: calc(100vh - 245px);
 }
 
 .box-element{
@@ -58,8 +65,15 @@ h1,h2,h3,h4,h5,h6{
 	width: 100px;
 }
 
+.img-responsive{
+	width: 400px;
+	max-width: 400px;
+	height: auto;
+	margin-top: 3rem;
+}
+
 .form-field{
-	width:250px;
+	width: 250px;
 	display: inline-block;
 	padding: 5px;
 }
@@ -96,4 +110,109 @@ h1,h2,h3,h4,h5,h6{
 
 .hidden{
 	display: none!important;
+}
+
+#navBarSearchForm{
+	min-width: 350px !important;
+	max-width: 500px;
+}
+
+.navigationbtns{
+	width: 100%;
+	background-color: #4f868c!important
+}
+
+.navbar-brand{
+	font-size:xx-large;
+}
+
+.nav-item{
+	font-size: large;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+#sidebar {
+	min-width: 250px;
+	max-width: 250px;
+	background: #4f868c!important;
+    color: #fff;
+    transition: all 0.3s;
+	margin-right: 2rem;
+}
+
+#sidebar a{
+	text-decoration: none;
+	color: #fff;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #4f868c !important;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+    color: #fff !important;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #4f868c;
+    background: #fff;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #4f868c;
+}
+
+#sidenavtogglebtn{
+	height: 30px;
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #4f868c;
+	text-decoration: none;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+footer{
+	min-height: 60px;
+}
+
+@media (max-width: 768px) {
+    
+    #sidebar.active {
+        margin-left: 0;
+    }
 }

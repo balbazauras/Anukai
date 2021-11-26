@@ -6,41 +6,148 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url 'store' %}">Anukai</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark flex-column px-4">
+        <div class="flex-row col-lg-12 me-auto">
+            <button class="navbar-toggler float-right" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-around" id="navbarSupportedContent">
+                <a class="navbar-brand" href="{% url 'store' %}">Anukai.lt</a>
+                <form class="d-flex" action="/search">
+                    <div class="input-group">
+                        <input name="q" type="search" class="form-control me-2" placeholder="Search" aria-label="Search"
+                            aria-describedby="search-addon" id="navBarSearchForm">
+                        <button class="btn text-light px-2" type="submit" id="search-addon"><i
+                                class="bi-search prefix grey-text"></i></button>
+                    </div>
+                </form>
+                <div class="ml-auto my-2 my-lg-0 d-inline-flex">
+                    <div class="d-flex">
+                        <!--Log in button-->
+                        <div class="text-centre">
+                            <a href="" class="btn text-light" data-toggle="modal" data-target="#loginPage">Log In <i
+                                    class="bi-person-fill text-light"></i></a>
+                        </div>
+                        <div class="d-flex ">
+                            <!--Sign up button-->
+                            <div class="text-centre">
+                                <a href="" class="btn text-light" data-toggle="modal" data-target="#signupPage">Sign Up
+                                    <i class="bi-person-plus-fill text-light"></i></a>
+                            </div>
+                        </div>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex" action="/search">
-                <div class="input-group">
-                    <input name="q" type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-dark" type="submit" id="button-addon2">Search</button>
+                    </div>
+                    <a href="{% url 'cart' %}">
+                        <img id="cart-icon" src="{% static 'images/cart.png' %}">
+                    </a>
+                    <p id="cart-total">0</p>
                 </div>
-            </form>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'store' %}">Store <span class="sr-only">(current)</span></a>
-                </li>
+                <!--Sign in Page Content-->
+                <div class="modal fade" id="signupPage">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
 
-            </ul>
-            <div class="form-inline my-2 my-lg-0">
-                <a href="#" class="btn btn-warning">Login</a>
+                            <div class="modal-header">
+                                <h4 class="modal-title w-100 font-weight-bold">Sign Up</h4>
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-lable="close">&times;</button>
+                            </div>
+                            <div class="modal-body mx-3">
+                                <div class="md-form mb-5">
+                                    <i class="bi-person prefix grey-text"></i>
+                                    <label data-error="wrong" data-success="right">Name</label>
+                                    <input type="text" class="form-control validate">
+                                </div>
 
-                <a href="{% url 'cart' %}">
-                    <img id="cart-icon" src="{% static 'images/cart.png' %}">
-                </a>
-                <p id="cart-total">0</p>
+                                <div class="md-form mb-5">
+                                    <i class="bi-envelope prefix grey-text"></i>
+                                    <label data-error="wrong" data-success="right">Email</label>
+                                    <input type="email" class="form-control validate">
+                                </div>
 
+
+                                <div class="md-form mb-5">
+                                    <i class="bi-lock prefix grey-text"></i>
+                                    <label data-error="wrong" data-success="right">Password</label>
+                                    <input type="password" class="form-control validate">
+                                </div>
+                            </div>
+
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button class="btn btn-dark">Sign up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--content of signin page-->
+
+                <div class="modal fade" id="loginPage">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header text-center">
+                                <h3 class="modal-title w-100 dark-grey-text font-weight-bold">Sign In</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body mx-4">
+                                <div class="md-form my-4">
+                                    <i class="bi-envelope prefix grey-text"></i>
+                                    <label data-error="wrong" data-success="right">Email</label>
+                                    <input type="email" class="form-control validate">
+                                </div>
+
+                                <div class="md-form my-4">
+                                    <i class="bi-lock prefix grey-text"></i>
+                                    <label data-error="wrong" data-success="right">Password</label>
+                                    <input type="password" class="form-control validate">
+                                    <p class="font-small blue-text d-flex justify-content-end"><a href="#"
+                                            class="blue-text ml-1">Forgot Password?</a></p>
+                                </div>
+
+                                <div class="text-center mb-3">
+                                    <button type="button" class="btn btn-dark btn-block z-depth-1a">Sign in</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-row navigationbtns col-lg-12" id="navbarSupportedContent">
+            <div class="navbar navbar-expand-lg navbar-light ">
+                <ul class="navbar-nav col-12 justify-content-around">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-light">Akcijos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-light">Parduotuvių tinklas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-light">Kontaktai</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-light">Apie mus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-light">D.U.K.</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -49,12 +156,25 @@
         <br> {% block content %} {% endblock content %}
     </div>
 
+    <footer class="p-3 bg-dark text-white text-center">
+        <div>
+            <p class="lead">
+            <p>Copyright &copy; 2021 UAB „Anukai digital“</p>
+            </p>
+        </div>
+    </footer>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
