@@ -1,10 +1,27 @@
 from django.http.response import Http404
 from django.shortcuts import redirect, render
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from .models import *
 
 # Create your views here.
 
+def login_request(request):
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username =username, password = password)
+ 
+        if user is not None:
+            login(request,user)
+            return redirect('/')
+        else:
+            form = LoginForm()
+            return render(request,'registration/login.html',{'form':form})
+     
+    else:
+        form = LoginForm()
+        return render(request, 'registration/login.html', {'form':form})
 
 def register(request):
 

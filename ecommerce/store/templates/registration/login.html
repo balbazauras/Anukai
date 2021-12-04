@@ -9,11 +9,14 @@ Login
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="logForm">
+    <h2>Prisijungimas</h2>
+    <br>
     <form method="post" class="form-group">
         {% csrf_token %}
         {{form|crispy}}
-        <p>Dar neturite paskyros?<a href="/register ">Registruotis</a></p>
-        <button type="submit" class="btn btn-success">Login</button>
+        <br>
+        <p>Dar neturite paskyros?&nbsp;<a href="/register ">Registruotis</a></p>
+        <button type="submit" class="btn btn-success">Prisijungti</button>
         
     </form>
 </div>

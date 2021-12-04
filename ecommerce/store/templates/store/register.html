@@ -7,10 +7,12 @@ Create an account
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="logForm">
+    <h2>Registracija</h2>
+    <br>
         <form method="POST" class="form-group">
             {% csrf_token %}
             {{form|crispy}}
-            <button type="submit" class="btn btn-success">Register</button>
+            <button type="submit" class="btn btn-success">Registruotis</button>
         </form>
 </div>
 
