@@ -13,7 +13,7 @@
 
 <body>
     {% block content %}
-    <div class="flex-row d-inline-flex m-auto col-md-auto navbar navbar-expand-lg">
+    <div class="flex-row d-inline-flex m-auto col-md-auto navbar navbar-expand-lg align-items-start">
         <button class="navbar-toggler float-left float-start mb-3" type="button" data-toggle="collapse"
                 data-target="#sidebarnav" aria-controls="sidebarnav" aria-expanded="false"
                 aria-label="Toggle navigation" id="sidenavtogglebtn">
@@ -23,7 +23,7 @@
             <!-- Sidebar -->
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3 class="text-light">Prekių kategorijos</h3>
+                    <h4 class="text-light">Prekių kategorijos</h4>
                 </div>
                 <ul class="list-unstyled components text-wrap">
                     <li>
@@ -119,12 +119,13 @@
      <!-- Page Content -->
         <div class="row">
             {% for product in products%}
-            <div class="col-lg-4 col-md-5 col-sm-5 ml-3">
+            <div class="col-lg-3 col-md-4 col-sm-5 ml-3">
                 <a href='/product/{{product.slug}}'><img class="thumbnail" src="images/{{product.image}}"></a>
                 <div class="box-element product">
                     <a href='/product/{{product.slug}}'><h6><strong>{{product.name}}</strong></h6></a>
-                    <button class="btn btn-outline-secondary add-btn bg-warning text-dark   "><img id="cart-icon" class="mr-4" src="{% static 'images/cart.png' %}">Įdėti į krepšelį</button>
                     <h4 style="display: inline-block; "><strong>${{product.price|floatformat:2}}</strong></h4>
+                    <button class="btn btn-outline-secondary add-btn bg-warning text-dark addBtn"><i class="bi-basket"></i>&nbsp;Įdėti į krepšelį</button>
+                   
     
                 </div>
             </div>
