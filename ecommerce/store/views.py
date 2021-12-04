@@ -1,8 +1,22 @@
 from django.http.response import Http404
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from .forms import RegisterForm
 from .models import *
 
 # Create your views here.
+
+
+def register(request):
+
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+    else:
+            form = RegisterForm()
+    
+    return render(request, "store/register.html", {"form":form})
 
 def store(request):
     products=Product.objects.all()

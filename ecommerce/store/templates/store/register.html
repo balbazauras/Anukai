@@ -1,0 +1,17 @@
+{% extends 'store/index.html' %} {% load static %}
+
+{% block title %}
+Create an account
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="logForm">
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="btn btn-success">Register</button>
+        </form>
+</div>
+
+{% endblock %}
