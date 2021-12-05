@@ -84,4 +84,20 @@ def single(request,slug):
         return render(request, 'store/single.html', context)
     except:
         raise Http404
-    
+
+def about(request):
+    return render(request, 'store/about.html')
+
+def contacts(request):
+    return render(request, 'store/contacts.html')
+
+def deals(request):
+    products=Product.objects.all()
+    context = {'products':products}
+    return render(request, 'store/deals.html', context)
+
+def storenetwork(request):
+    return render(request, 'store/storenetwork.html')
+
+def faq(request):
+    return render(request, 'store/faq.html')

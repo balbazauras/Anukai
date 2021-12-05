@@ -1,3 +1,4 @@
+from django import urls
 from django.urls import path, include
 from django.conf.urls import include, url
 from django.contrib import admin
@@ -14,6 +15,10 @@ urlpatterns = [
 	path('cart/', views.cart, name="cart"),
 	path('checkout/', views.checkout, name="checkout"),
 	path('search/',views.search ,name="search"),
-	path('product/<slug:slug>',views.single, name="single_product")
-
+	path('product/<slug:slug>',views.single, name="single_product"),
+	path('about/',views.about ,name="about"),
+	path('contacts/',views.contacts ,name="contacts"),
+	path('deals/',views.deals ,name="deals"),
+	path('storenetwork/',views.storenetwork ,name="storenetwork"),
+	path('faq/',views.faq ,name="faq")
 ]
