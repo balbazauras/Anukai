@@ -11,6 +11,35 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        function GetToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = GetToken('csrftoken')
+        var cart = JSON.parse(GetToken('cart'))
+
+        if (cart == undefined) {
+            cart = {}
+            console.log('Cart was created!')
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+        }
+        console.log('Cart', cart)
+
+    </script>
 </head>
 
 <body>
@@ -44,49 +73,47 @@
                             <a href="{% url 'logout' %}" class="btn text-light">Atsijungti <i
                                     class="bi-person-fill text-light"></i></a>
                         </div>
-                    </div>
-                    {% else %}
+                        {% else %}
                         <div class="d-flex">
                             <!--Log in button-->
                             <div class="text-centre">
                                 <a href="{% url 'login' %}" class="btn text-light">Prisijungti <i
                                         class="bi-person-fill text-light"></i></a>
                             </div>
-                        <div class="d-flex ">
-                            <!--Sign up button-->
-                            <div class="text-centre">
-                                <a href="{% url 'register' %}" class="btn text-light">Registruotis
-                                    <i class="bi-person-plus-fill text-light"></i></a>
+                            <div class="d-flex ">
+                                <!--Sign up button-->
+                                <div class="text-centre">
+                                    <a href="{% url 'register' %}" class="btn text-light">Registruotis
+                                        <i class="bi-person-plus-fill text-light"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                         {% endif %}
                         <a href="{% url 'cart' %}">
                             <img id="cart-icon" src="{% static 'images/cart.png' %}">
                         </a>
-                        <p id="cart-total">0</p>
+                        <p id="cart-total">{{cartItems}}</p>
                     </div>
                 </div>
-                <hr>
             </div>
 
             <div class="flex-row navigationbtns navbar">
                 <div class="navbar-light collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav col-sm-12 justify-content-around">
                         <li class="nav-item">
-                            <a href="{% url 'deals' %}" class="nav-link text-light">Akcijos</a>
+                            <a href="#" class="nav-link text-light">Akcijos</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'storenetwork' %}" class="nav-link text-light">Parduotuvių tinklas</a>
+                            <a href="#" class="nav-link text-light">Parduotuvių tinklas</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'contacts' %}" class="nav-link text-light">Kontaktai</a>
+                            <a href="#" class="nav-link text-light">Kontaktai</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'about' %}" class="nav-link text-light">Apie mus</a>
+                            <a href="#" class="nav-link text-light">Apie mus</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'faq' %}" class="nav-link text-light">D.U.K.</a>
+                            <a href="#" class="nav-link text-light">D.U.K.</a>
                         </li>
                     </ul>
                 </div>
@@ -97,7 +124,7 @@
         <br> {% block content %} {% endblock content %}
     </div>
 
-    <footer class="bg-dark text-white text-center d-flex align-items-center justify-content-center">
+    <footer class="p-3 mt-3 mb-3 bg-dark text-white text-center">
         <div>
             <p class="lead">
             <p>Copyright &copy; 2021 UAB „Anukai digital“</p>
@@ -105,6 +132,7 @@
         </div>
     </footer>
 
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

@@ -15,13 +15,15 @@
     {% block content %}
     <div class="row">
         {% for product in products%}
-        <div class="col-lg-2 col-md-4 col-sm-5 ml-3">
-            <a href='/product/{{product.slug}}'><img class="thumbnail" src="images/{{product.image}}"></a>
-            <div class="box-element product d-flex flex-column justify-content-center">
-                <a href='/product/{{product.slug}}'><h6><strong>{{product.name}}</strong></h6></a>
+        <div class="col-lg-4">
+            <img class="thumbnail" src="images/{{product.image}}">
+            <div class="box-element product">
+                <h6><strong>{{product.name}}</strong></h6>
+                <hr>
+
+                <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+                <a class="btn btn-outline-success" href='/product/{{product.slug}}'>View</a>
                 <h4 style="display: inline-block; "><strong>${{product.price|floatformat:2}}</strong></h4>
-                <button class="btn btn-outline-secondary add-btn bg-warning text-dark addBtn"><i class="bi-basket"></i>&nbsp;Įdėti į krepšelį</button>
-               
 
             </div>
         </div>

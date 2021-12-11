@@ -1,9 +1,12 @@
 from django.contrib.auth import authenticate, login
-from django.http.response import Http404
+from django.db.models.fields.related import ForeignKey
+from django.http.response import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from .forms import RegisterForm, LoginForm
 from .models import *
-
+import json
+from django.http.response import Http404
+from django.http import JsonResponse
 # Create your views here.
 
 def login_request(request):
@@ -30,37 +33,54 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            vartotojas= User.objects.get(username=request.POST.get('username'))
+            kustomeris= Customer.objects.create(user=vartotojas,name=request.POST.get('username'), email=request.POST.get('email'))
             return redirect("/")
+           
     else:
             form = RegisterForm()
     
     return render(request, "store/register.html", {"form":form})
 
 def store(request):
-    products=Product.objects.all()
-    context = {'products':products}
-    return render(request, 'store/store.html', context)
+    if request.user.is_authenticated:
+        customer=Customer.objects.get(user =request.user)
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {"get_cart_total": 0, "get_cart_items": 0}
+        cartItems = order["get_cart_items"]
+    products = Product.objects.all()
+    context = {"products": products, "cartItems": cartItems}
+    return render(request, "store/store.html", context)
+
 
 def cart(request):
     if request.user.is_authenticated:
-        customer=request.user.customer
+        customer=Customer.objects.get(user =request.user)
         order, created =Order.objects.get_or_create(customer=customer,complete=False)
         items=order.orderitem_set.all()
+        cartItems = order.get_cart_items
     else:
         items=[]
         order={'get_cart_total':0, 'get_cart_items':0}
-    context = {'items':items, 'order':order}
+        cartItems = order["get_cart_items"]
+    context = {"items": items, "order": order, "cartItems": cartItems}
     return render(request, 'store/cart.html', context)
 
 def checkout(request):
     if request.user.is_authenticated:
-        customer=request.user.customer
+        customer=Customer.objects.get(user =request.user)
         order, created =Order.objects.get_or_create(customer=customer,complete=False)
         items=order.orderitem_set.all()
+        cartItems = order.get_cart_items
     else:
         items=[]
         order={'get_cart_total':0, 'get_cart_items':0}
-    context = {'items':items, 'order':order}
+        cartItems = order["get_cart_items"]
+    context = {"items": items, "order": order, "cartItems": cartItems}
     return render(request, 'store/checkout.html', context)
 
 def search(request):
@@ -85,19 +105,31 @@ def single(request,slug):
     except:
         raise Http404
 
-def about(request):
-    return render(request, 'store/about.html')
+def updateItem(request):
+    data = json.loads(request.body)
+    productId = data["productId"]
+    action = data["action"]
+    print("Action:", action)
+    print("productId:", productId)
+    customer=Customer.objects.get(user =request.user)
+    
+    product = Product.objects.get(id=productId)
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
-def contacts(request):
-    return render(request, 'store/contacts.html')
+    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
-def deals(request):
-    products=Product.objects.all()
-    context = {'products':products}
-    return render(request, 'store/deals.html', context)
+    if action == "add":
+        orderItem.quantity = orderItem.quantity + 1
+    elif action == "remove":
+        orderItem.quantity = orderItem.quantity - 1
 
-def storenetwork(request):
-    return render(request, 'store/storenetwork.html')
+    orderItem.save()
 
-def faq(request):
-    return render(request, 'store/faq.html')
+    if orderItem.quantity <= 0:
+        orderItem.delete()
+    return JsonResponse("Item was added", safe=False)
+
+
+def proccesOrder(request):
+    print ('Data',request.body)
+    return JsonResponse("Payment complete", safe=False)

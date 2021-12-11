@@ -13,125 +13,21 @@
 
 <body>
     {% block content %}
-    <div class="flex-row d-inline-flex m-auto col-md-auto navbar navbar-expand-lg align-items-start">
-        <button class="navbar-toggler float-left float-start mb-3" type="button" data-toggle="collapse"
-                data-target="#sidebarnav" aria-controls="sidebarnav" aria-expanded="false"
-                aria-label="Toggle navigation" id="sidenavtogglebtn">
-                <i class="bi-menu-button"></i>
-            </button>
-        <div class="wrapper col-md-3 mb-3 collapse navbar-collapse" id="sidebarnav">
-            <!-- Sidebar -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <h4 class="text-light">Prekių kategorijos</h4>
-                </div>
-                <ul class="list-unstyled components text-wrap">
-                    <li>
-                        <a href="#phonesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Telefonai</a>
-                        <ul class="collapse list-unstyled" id="phonesSubmenu">
-                            <li>
-                                <a href="#">Mobilieji telefonai</a>
-                            </li>
-                            <li>
-                                <a href="#">Priedai mobiliems ir išmaniems telefonams</a>
-                            </li>
-                            <li>
-                                <a href="#">Belaidžiai ir stacionarūs telefonai</a>
-                            </li>
-                            <li>
-                                <a href="#">Išmanieji laikrodžiai ir apyrankės</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#appliencesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Buitinė technika</a>
-                        <ul class="collapse list-unstyled" id="appliencesSubmenu">
-                            <li>
-                                <a href="#">Smulki buitinė technika namams</a>
-                            </li>
-                            <li>
-                                <a href="#">Smulki virtuvės technika</a>
-                            </li>
-                            <li>
-                                <a href="#">Langų valytuvai, valymo garais įranga ir priedai</a>
-                            </li>
-                            <li>
-                                <a href="#">Stambi buitinė technika</a>
-                            </li>
-                            <li>
-                                <a href="#">Įmontuojama technika</a>
-                            </li>
-                            <li>
-                                <a href="#">Kavos aparatai</a>
-                            </li>
+    <div class="row">
+        {% for product in products%}
+        <div class="col-lg-4">
+            <img class="thumbnail" src="images/{{product.image}}">
+            <div class="box-element product">
+                <h6><strong>{{product.name}}</strong></h6>
+                <hr>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#gardenSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sodo prekės</a>
-                        <ul class="collapse list-unstyled" id="gardenSubmenu">
-                            <li>
-                                <a href="#">Tinklai, tvoros, vartai</a>
-                            </li>
-                            <li>
-                                <a href="#">Sodo, daržo technika</a>
-                            </li>
-                            <li>
-                                <a href="#">Lauko baldai</a>
-                            </li>
-                            <li>
-                                <a href="#">Sodo, daržo įrankiai</a>
-                            </li>
-                            <li>
-                                <a href="#">Vejapjovės, žoliapjovės ir priedai</a>
-                            </li>
+                <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                <a class="btn btn-outline-success" href='/product/{{product.slug}}'>View</a>
+                <h4 style="display: inline-block; "><strong>${{product.price|floatformat:2}}</strong></h4>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#furnitureSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Baldai, interjeras, tekstilė</a>
-                        <ul class="collapse list-unstyled" id="furnitureSubmenu">
-                            <li>
-                                <a href="#">Svetainės baldai</a>
-                            </li>
-                            <li>
-                                <a href="#">Lauko baldai</a>
-                            </li>
-                            <li>
-                                <a href="#">Vonios kambario baldai</a>
-                            </li>
-                            <li>
-                                <a href="#">Biuro baldai</a>
-                            </li>
-                            <li>
-                                <a href="#">Virtuvės, prieškambario baldai</a>
-                            </li>
-                            <li>
-                                <a href="#">Miegamojo baldai</a>
-                            </li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        
-     <!-- Page Content -->
-        <div class="row">
-            {% for product in products%}
-            <div class="col-lg-4 col-md-4 col-sm-5 ml-3">
-                <a href='/product/{{product.slug}}'><img class="thumbnail" src="images/{{product.image}}"></a>
-                <div class="box-element product d-flex flex-column justify-content-center">
-                    <a href='/product/{{product.slug}}'><h6><strong>{{product.name}}</strong></h6></a>
-                    <h4 style="display: inline-block; "><strong>${{product.price|floatformat:2}}</strong></h4>
-                    <button class="btn btn-outline-secondary add-btn bg-warning text-dark addBtn"><i class="bi-basket"></i>&nbsp;Įdėti į krepšelį</button>
-                   
-    
-                </div>
             </div>
-            {% endfor %}
         </div>
-        
+        {% endfor %}
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

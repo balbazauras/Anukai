@@ -1,6 +1,5 @@
 body{
 	background-color: hsl(0, 0%, 98%);
-	font-size: smaller;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -9,8 +8,8 @@ h1,h2,h3,h4,h5,h6{
 
 .container{
 	min-width: 90%;
-	max-width: 95%;
-	min-height: calc(100vh - 225px);
+	max-width: 90%;
+	min-height: calc(100vh - 265px);
 }
 
 .logForm{
@@ -135,10 +134,10 @@ h1,h2,h3,h4,h5,h6{
 #navBarSearchForm{
 	min-width: 350px !important;
 	max-width: 500px;
-	max-height: 40px;
 }
 
 .navigationbtns{
+	border-bottom: medium;
 	width: 100%;
 	background-color: #4f868c!important;
 }
@@ -148,7 +147,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .nav-item{
-	font-size:larger;
+	font-size: large;
 }
 
 .wrapper {
@@ -227,14 +226,8 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
-hr{
-	margin: 0px;
-}
-
 footer{
-	margin-top: 40px;
-	min-height: 45px;
-	max-height: 45px;
+	min-height: 60px;
 }
 
 @media (max-width: 768px) {
